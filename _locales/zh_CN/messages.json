@@ -1,0 +1,286 @@
+{
+  "extName": {
+    "message": "EnterKeyMaster",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "让你在 AI 聊天网页中自由定制 Enter/Ctrl+Enter/Shift+Enter 的行为，告别误触 enter 提前发送",
+    "description": "Extension description"
+  },
+  "popupTitle": {
+    "message": "快捷键设置",
+    "description": "Popup page title"
+  },
+  "loading": {
+    "message": "加载中...",
+    "description": "Loading text"
+  },
+  "enabled": {
+    "message": "已启用",
+    "description": "Enabled status"
+  },
+  "disabled": {
+    "message": "已禁用",
+    "description": "Disabled status"
+  },
+  "defaultEnableAll": {
+    "message": "默认启用所有网站",
+    "description": "Default enable toggle label"
+  },
+  "enableOnSite": {
+    "message": "在此网站启用",
+    "description": "Domain enable toggle label"
+  },
+  "keyEnter": {
+    "message": "Enter",
+    "description": "Enter key label"
+  },
+  "keyCtrlEnter": {
+    "message": "Ctrl+Enter",
+    "description": "Ctrl+Enter key label"
+  },
+  "keyShiftEnter": {
+    "message": "Shift+Enter",
+    "description": "Shift+Enter key label"
+  },
+  "actionSend": {
+    "message": "发送",
+    "description": "Send action label"
+  },
+  "actionNewline": {
+    "message": "换行",
+    "description": "Newline action label"
+  },
+  "actionBlock": {
+    "message": "阻止",
+    "description": "Block action label"
+  },
+  "actionDefault": {
+    "message": "默认",
+    "description": "Default action label"
+  },
+  "btnSettings": {
+    "message": "⚙️ 选项",
+    "description": "Settings button"
+  },
+  "btnFeedback": {
+    "message": "💬 反馈",
+    "description": "Feedback button"
+  },
+  "saved": {
+    "message": "✓ 已保存",
+    "description": "Saved toast message"
+  },
+  "optionsTitle": {
+    "message": "EnterKeyMaster 设置",
+    "description": "Options page title"
+  },
+  "defaultEnableToggle": {
+    "message": "默认启用所有网站",
+    "description": "Default enable toggle in options"
+  },
+  "projectInfo": {
+    "message": "项目信息",
+    "description": "Project info section title"
+  },
+  "projectUrl": {
+    "message": "项目地址:",
+    "description": "Project URL label"
+  },
+  "privacyNotice": {
+    "message": "隐私声明:",
+    "description": "Privacy notice label"
+  },
+  "privacyText": {
+    "message": "本项目不收集任何用户隐私数据",
+    "description": "Privacy notice text"
+  },
+  "license": {
+    "message": "开源协议:",
+    "description": "License label"
+  },
+  "licenseText": {
+    "message": "本项目遵循 MIT 开源协议",
+    "description": "License text"
+  },
+  "siteConfig": {
+    "message": "网站配置",
+    "description": "Site configuration section title"
+  },
+  "addSite": {
+    "message": "+ 添加网站",
+    "description": "Add site button"
+  },
+  "colDomain": {
+    "message": "域名",
+    "description": "Domain column header"
+  },
+  "colEnter": {
+    "message": "Enter",
+    "description": "Enter column header"
+  },
+  "colCtrlEnter": {
+    "message": "Ctrl+Enter",
+    "description": "Ctrl+Enter column header"
+  },
+  "colShiftEnter": {
+    "message": "Shift+Enter",
+    "description": "Shift+Enter column header"
+  },
+  "colSelector": {
+    "message": "发送按钮选择器",
+    "description": "Selector column header"
+  },
+  "colStatus": {
+    "message": "状态",
+    "description": "Status column header"
+  },
+  "colAction": {
+    "message": "操作",
+    "description": "Action column header"
+  },
+  "statusEnabled": {
+    "message": "已启用",
+    "description": "Enabled status text"
+  },
+  "statusDisabled": {
+    "message": "已禁用",
+    "description": "Disabled status text"
+  },
+  "btnDelete": {
+    "message": "删除",
+    "description": "Delete button"
+  },
+  "directEdit": {
+    "message": "直接配置编辑(高级)",
+    "description": "Direct edit section title"
+  },
+  "jsonPlaceholder": {
+    "message": "JSON 配置将在此显示",
+    "description": "JSON editor placeholder"
+  },
+  "btnSave": {
+    "message": "立即保存",
+    "description": "Save button"
+  },
+  "addSiteModalTitle": {
+    "message": "添加网站配置",
+    "description": "Add site modal title"
+  },
+  "domainPlaceholder": {
+    "message": "输入域名，例如：github.com",
+    "description": "Domain input placeholder"
+  },
+  "btnConfirm": {
+    "message": "确认",
+    "description": "Confirm button"
+  },
+  "btnCancel": {
+    "message": "取消",
+    "description": "Cancel button"
+  },
+  "toastDefaultEnabled": {
+    "message": "已默认启用所有网站",
+    "description": "Toast message when default enabled"
+  },
+  "toastDefaultDisabled": {
+    "message": "已默认禁用所有网站",
+    "description": "Toast message when default disabled"
+  },
+  "toastEnabled": {
+    "message": "已启用 {domain}",
+    "description": "Toast message when domain enabled"
+  },
+  "toastDisabled": {
+    "message": "已禁用 {domain}",
+    "description": "Toast message when domain disabled"
+  },
+  "toastSaved": {
+    "message": "已保存",
+    "description": "Toast message when saved"
+  },
+  "toastSelectorSaved": {
+    "message": "选择器已保存",
+    "description": "Toast message when selector saved"
+  },
+  "toastDeleted": {
+    "message": "已删除 {domain} 配置",
+    "description": "Toast message when domain deleted"
+  },
+  "toastAdded": {
+    "message": "已添加 {domain}",
+    "description": "Toast message when domain added"
+  },
+  "jsonError": {
+    "message": "JSON 语法错误: {error}",
+    "description": "JSON error message"
+  },
+  "saveFailed": {
+    "message": "保存失败: {error}",
+    "description": "Save failed message"
+  },
+  "jsonSaved": {
+    "message": "JSON 配置已保存",
+    "description": "JSON saved message"
+  },
+  "alertEnterDomain": {
+    "message": "请输入域名",
+    "description": "Alert message when domain is empty"
+  },
+  "alertDomainExists": {
+    "message": "该域名已存在",
+    "description": "Alert message when domain exists"
+  },
+  "unknownDomain": {
+    "message": "未知域名",
+    "description": "Unknown domain text"
+  },
+  "noTab": {
+    "message": "未找到标签页",
+    "description": "No tab found text"
+  },
+  "cannotGetDomain": {
+    "message": "无法获取域名",
+    "description": "Cannot get domain text"
+  },
+  "defaultLabel": {
+    "message": "(默认)",
+    "description": "Default label suffix"
+  },
+  "selectorPlaceholder": {
+    "message": "如：send-btn",
+    "description": "Selector input placeholder"
+  },
+  "defaultEnabledAll": {
+    "message": "默认启用所有网站",
+    "description": "Toast message when default enabled all"
+  },
+  "defaultDisabledAll": {
+    "message": "默认禁用所有网站",
+    "description": "Toast message when default disabled all"
+  },
+  "enabledSite": {
+    "message": "已启用 {domain}",
+    "description": "Toast message when site enabled"
+  },
+  "disabledSite": {
+    "message": "已禁用 {domain}",
+    "description": "Toast message when site disabled"
+  },
+  "configDeleted": {
+    "message": "{domain} 配置已删除",
+    "description": "Toast message when config deleted"
+  },
+  "enterDomain": {
+    "message": "请输入域名",
+    "description": "Alert message when domain is empty"
+  },
+  "domainExists": {
+    "message": "该域名已存在",
+    "description": "Alert message when domain exists"
+  },
+  "siteAdded": {
+    "message": "已添加 {domain}",
+    "description": "Toast message when site added"
+  }
+}

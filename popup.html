@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="popupTitle">Shortcut Settings</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="domain-info">
+        <span id="currentDomain" data-i18n="loading">Loading...</span>
+      </div>
+
+      <!-- 新增：状态和开关区域 -->
+      <div class="status-section">
+        <div class="status-indicator-wrapper">
+          <div class="status-indicator active" id="statusIndicator"></div>
+          <span class="status-text" id="statusText" data-i18n="enabled">Enabled</span>
+        </div>
+      </div>
+
+      <div class="toggle-section">
+        <!-- 默认启用开关 -->
+        <div class="toggle-item">
+          <span class="toggle-label" data-i18n="defaultEnableAll">Enable all websites by default</span>
+          <label class="switch">
+            <input type="checkbox" id="defaultToggle" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- 域名开关 -->
+        <div class="toggle-item">
+          <span class="toggle-label domain-toggle-label" data-i18n="enableOnSite">Enable on this site</span>
+          <label class="switch">
+            <input type="checkbox" id="domainToggle" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="divider"></div>
+
+      <!-- 原有的按键配置区域 -->
+      <div class="config-section">
+        <div class="key-list">
+          <!-- Enter配置 -->
+          <div class="key-item" data-key="enter">
+            <div class="key-label" data-i18n="keyEnter">Enter</div>
+            <div class="key-current" id="current-enter" data-i18n="actionSend">Send</div>
+            <div class="key-options hidden">
+              <div class="option" data-action="send" data-i18n="actionSend">Send</div>
+              <div class="option" data-action="addNewline" data-i18n="actionNewline">Newline</div>
+              <div class="option" data-action="block" data-i18n="actionBlock">Block</div>
+              <div class="option" data-action="default" data-i18n="actionDefault">Default</div>
+            </div>
+          </div>
+
+          <!-- Ctrl+Enter配置 -->
+          <div class="key-item" data-key="ctrlEnter">
+            <div class="key-label" data-i18n="keyCtrlEnter">Ctrl+Enter</div>
+            <div class="key-current" id="current-ctrlEnter" data-i18n="actionNewline">Newline</div>
+            <div class="key-options hidden">
+              <div class="option" data-action="send" data-i18n="actionSend">Send</div>
+              <div class="option" data-action="addNewline" data-i18n="actionNewline">Newline</div>
+              <div class="option" data-action="block" data-i18n="actionBlock">Block</div>
+              <div class="option" data-action="default" data-i18n="actionDefault">Default</div>
+            </div>
+          </div>
+
+          <!-- Shift+Enter配置 -->
+          <div class="key-item" data-key="shiftEnter">
+            <div class="key-label" data-i18n="keyShiftEnter">Shift+Enter</div>
+            <div class="key-current" id="current-shiftEnter" data-i18n="actionDefault">Default</div>
+            <div class="key-options hidden">
+              <div class="option" data-action="send" data-i18n="actionSend">Send</div>
+              <div class="option" data-action="addNewline" data-i18n="actionNewline">Newline</div>
+              <div class="option" data-action="block" data-i18n="actionBlock">Block</div>
+              <div class="option" data-action="default" data-i18n="actionDefault">Default</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button id="settingsBtn" class="footer-btn" data-i18n="btnSettings">⚙️ Settings</button>
+        <button id="feedbackBtn" class="footer-btn" data-i18n="btnFeedback">💬 Feedback</button>
+      </div>
+
+      <div id="saveToast" class="toast hidden">
+        <span class="toast-text" data-i18n="saved">✓ Saved</span>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

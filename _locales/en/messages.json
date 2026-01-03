@@ -1,0 +1,286 @@
+{
+  "extName": {
+    "message": "EnterKeyMaster",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Customize Enter/Ctrl+Enter/Shift+Enter behavior in AI chat websites to avoid accidental submissions",
+    "description": "Extension description"
+  },
+  "popupTitle": {
+    "message": "Shortcut Settings",
+    "description": "Popup page title"
+  },
+  "loading": {
+    "message": "Loading...",
+    "description": "Loading text"
+  },
+  "enabled": {
+    "message": "Enabled",
+    "description": "Enabled status"
+  },
+  "disabled": {
+    "message": "Disabled",
+    "description": "Disabled status"
+  },
+  "defaultEnableAll": {
+    "message": "Enable all websites by default",
+    "description": "Default enable toggle label"
+  },
+  "enableOnSite": {
+    "message": "Enable on this site",
+    "description": "Domain enable toggle label"
+  },
+  "keyEnter": {
+    "message": "Enter",
+    "description": "Enter key label"
+  },
+  "keyCtrlEnter": {
+    "message": "Ctrl+Enter",
+    "description": "Ctrl+Enter key label"
+  },
+  "keyShiftEnter": {
+    "message": "Shift+Enter",
+    "description": "Shift+Enter key label"
+  },
+  "actionSend": {
+    "message": "Send",
+    "description": "Send action label"
+  },
+  "actionNewline": {
+    "message": "Newline",
+    "description": "Newline action label"
+  },
+  "actionBlock": {
+    "message": "Block",
+    "description": "Block action label"
+  },
+  "actionDefault": {
+    "message": "Default",
+    "description": "Default action label"
+  },
+  "btnSettings": {
+    "message": "⚙️ Settings",
+    "description": "Settings button"
+  },
+  "btnFeedback": {
+    "message": "💬 Feedback",
+    "description": "Feedback button"
+  },
+  "saved": {
+    "message": "✓ Saved",
+    "description": "Saved toast message"
+  },
+  "optionsTitle": {
+    "message": "EnterKeyMaster Settings",
+    "description": "Options page title"
+  },
+  "defaultEnableToggle": {
+    "message": "Enable all websites by default",
+    "description": "Default enable toggle in options"
+  },
+  "projectInfo": {
+    "message": "Project Info",
+    "description": "Project info section title"
+  },
+  "projectUrl": {
+    "message": "Project URL:",
+    "description": "Project URL label"
+  },
+  "privacyNotice": {
+    "message": "Privacy Notice:",
+    "description": "Privacy notice label"
+  },
+  "privacyText": {
+    "message": "This project does not collect any user privacy data",
+    "description": "Privacy notice text"
+  },
+  "license": {
+    "message": "License:",
+    "description": "License label"
+  },
+  "licenseText": {
+    "message": "This project follows the MIT open source license",
+    "description": "License text"
+  },
+  "siteConfig": {
+    "message": "Site Configuration",
+    "description": "Site configuration section title"
+  },
+  "addSite": {
+    "message": "+ Add Site",
+    "description": "Add site button"
+  },
+  "colDomain": {
+    "message": "Domain",
+    "description": "Domain column header"
+  },
+  "colEnter": {
+    "message": "Enter",
+    "description": "Enter column header"
+  },
+  "colCtrlEnter": {
+    "message": "Ctrl+Enter",
+    "description": "Ctrl+Enter column header"
+  },
+  "colShiftEnter": {
+    "message": "Shift+Enter",
+    "description": "Shift+Enter column header"
+  },
+  "colSelector": {
+    "message": "Send Button Selector",
+    "description": "Selector column header"
+  },
+  "colStatus": {
+    "message": "Status",
+    "description": "Status column header"
+  },
+  "colAction": {
+    "message": "Action",
+    "description": "Action column header"
+  },
+  "statusEnabled": {
+    "message": "Enabled",
+    "description": "Enabled status text"
+  },
+  "statusDisabled": {
+    "message": "Disabled",
+    "description": "Disabled status text"
+  },
+  "btnDelete": {
+    "message": "Delete",
+    "description": "Delete button"
+  },
+  "directEdit": {
+    "message": "Direct Config Edit (Advanced)",
+    "description": "Direct edit section title"
+  },
+  "jsonPlaceholder": {
+    "message": "JSON configuration will be displayed here",
+    "description": "JSON editor placeholder"
+  },
+  "btnSave": {
+    "message": "Save Now",
+    "description": "Save button"
+  },
+  "addSiteModalTitle": {
+    "message": "Add Site Configuration",
+    "description": "Add site modal title"
+  },
+  "domainPlaceholder": {
+    "message": "Enter domain, e.g.: github.com",
+    "description": "Domain input placeholder"
+  },
+  "btnConfirm": {
+    "message": "Confirm",
+    "description": "Confirm button"
+  },
+  "btnCancel": {
+    "message": "Cancel",
+    "description": "Cancel button"
+  },
+  "toastDefaultEnabled": {
+    "message": "All websites enabled by default",
+    "description": "Toast message when default enabled"
+  },
+  "toastDefaultDisabled": {
+    "message": "All websites disabled by default",
+    "description": "Toast message when default disabled"
+  },
+  "toastEnabled": {
+    "message": "Enabled {domain}",
+    "description": "Toast message when domain enabled"
+  },
+  "toastDisabled": {
+    "message": "Disabled {domain}",
+    "description": "Toast message when domain disabled"
+  },
+  "toastSaved": {
+    "message": "Saved",
+    "description": "Toast message when saved"
+  },
+  "toastSelectorSaved": {
+    "message": "Selector saved",
+    "description": "Toast message when selector saved"
+  },
+  "toastDeleted": {
+    "message": "{domain} configuration deleted",
+    "description": "Toast message when domain deleted"
+  },
+  "toastAdded": {
+    "message": "Added {domain}",
+    "description": "Toast message when domain added"
+  },
+  "jsonError": {
+    "message": "JSON syntax error: {error}",
+    "description": "JSON error message"
+  },
+  "saveFailed": {
+    "message": "Save failed: {error}",
+    "description": "Save failed message"
+  },
+  "jsonSaved": {
+    "message": "JSON configuration saved",
+    "description": "JSON saved message"
+  },
+  "alertEnterDomain": {
+    "message": "Please enter a domain",
+    "description": "Alert message when domain is empty"
+  },
+  "alertDomainExists": {
+    "message": "This domain already exists",
+    "description": "Alert message when domain exists"
+  },
+  "unknownDomain": {
+    "message": "Unknown domain",
+    "description": "Unknown domain text"
+  },
+  "noTab": {
+    "message": "No tab found",
+    "description": "No tab found text"
+  },
+  "cannotGetDomain": {
+    "message": "Cannot get domain",
+    "description": "Cannot get domain text"
+  },
+  "defaultLabel": {
+    "message": "(Default)",
+    "description": "Default label suffix"
+  },
+  "selectorPlaceholder": {
+    "message": "e.g.: send-btn",
+    "description": "Selector input placeholder"
+  },
+  "defaultEnabledAll": {
+    "message": "All websites enabled by default",
+    "description": "Toast message when default enabled all"
+  },
+  "defaultDisabledAll": {
+    "message": "All websites disabled by default",
+    "description": "Toast message when default disabled all"
+  },
+  "enabledSite": {
+    "message": "Enabled {domain}",
+    "description": "Toast message when site enabled"
+  },
+  "disabledSite": {
+    "message": "Disabled {domain}",
+    "description": "Toast message when site disabled"
+  },
+  "configDeleted": {
+    "message": "{domain} configuration deleted",
+    "description": "Toast message when config deleted"
+  },
+  "enterDomain": {
+    "message": "Please enter a domain",
+    "description": "Alert message when domain is empty"
+  },
+  "domainExists": {
+    "message": "This domain already exists",
+    "description": "Alert message when domain exists"
+  },
+  "siteAdded": {
+    "message": "Added {domain}",
+    "description": "Toast message when site added"
+  }
+}

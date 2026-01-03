@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="optionsTitle">EnterKeyMaster Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 data-i18n="optionsTitle">⚙️ EnterKeyMaster Settings</h1>
+      </header>
+
+      <!-- 默认全局模式开关 -->
+      <div class="debug-section">
+        <label class="debug-toggle">
+          <input type="checkbox" id="defaultEnabledToggle" />
+          <span data-i18n="defaultEnableToggle">Enable all websites by default</span>
+        </label>
+      </div>
+
+      <!-- 项目信息折叠模块 -->
+      <div class="info-section">
+        <div class="info-header" id="infoHeader">
+          <h2 data-i18n="projectInfo">Project Info</h2>
+          <button id="toggleInfoBtn" class="btn-toggle">▼</button>
+        </div>
+
+        <div class="info-content" id="infoContent">
+          <div class="info-text">
+            <p>
+              <strong data-i18n="projectUrl">Project URL:</strong>
+              <a
+                href="https://github.com/jldxhg/EnterKeyMaster"
+                target="_blank"
+                rel="noopener noreferrer"
+                >https://github.com/jldxhg/EnterKeyMaster</a
+              >
+            </p>
+            <p><strong data-i18n="privacyNotice">Privacy Notice:</strong><span data-i18n="privacyText">This project does not collect any user privacy data</span></p>
+            <p><strong data-i18n="license">License:</strong><span data-i18n="licenseText">This project follows the MIT open source license</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 域名配置表格 -->
+      <div class="table-section">
+        <div class="section-header">
+          <h2 data-i18n="siteConfig">Site Configuration</h2>
+          <button id="addDomainBtn" class="btn-add" data-i18n="addSite">+ Add Site</button>
+        </div>
+
+        <table id="domainTable">
+          <thead>
+            <tr>
+              <th data-i18n="colDomain">Domain</th>
+              <th data-i18n="colEnter">Enter</th>
+              <th data-i18n="colCtrlEnter">Ctrl+Enter</th>
+              <th data-i18n="colShiftEnter">Shift+Enter</th>
+              <th data-i18n="colSelector">Send Button Selector</th>
+              <th data-i18n="colStatus">Status</th>
+              <th data-i18n="colAction">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- 动态生成 -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 本地设置直接编辑模块 -->
+      <div class="local-edit-section">
+        <div class="local-edit-header" id="localEditHeader">
+          <h2 data-i18n="directEdit">Direct Config Edit (Advanced)</h2>
+          <button id="toggleEditBtn" class="btn-toggle">▼</button>
+        </div>
+
+        <div class="local-edit-content" id="localEditContent">
+          <div class="edit-area">
+            <textarea
+              id="jsonEditor"
+              data-i18n-placeholder="jsonPlaceholder"
+              placeholder="JSON configuration will be displayed here"
+            ></textarea>
+          </div>
+          <div class="edit-actions">
+            <button id="saveJsonBtn" class="btn-primary" data-i18n="btnSave">Save Now</button>
+            <span id="jsonError" class="error-message"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast提示 -->
+      <div id="toast" class="toast hidden">
+        <span id="toastText" data-i18n="saved">✓ Saved</span>
+      </div>
+    </div>
+
+    <!-- 添加域名对话框 -->
+    <div id="addDomainModal" class="modal hidden">
+      <div class="modal-content">
+        <h3 data-i18n="addSiteModalTitle">Add Site Configuration</h3>
+        <input
+          type="text"
+          id="newDomainInput"
+          data-i18n-placeholder="domainPlaceholder"
+          placeholder="Enter domain, e.g.: github.com"
+        />
+        <div class="modal-buttons">
+          <button id="confirmAddBtn" class="btn-primary" data-i18n="btnConfirm">Confirm</button>
+          <button id="cancelAddBtn" class="btn-secondary" data-i18n="btnCancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
