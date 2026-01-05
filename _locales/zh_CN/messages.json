@@ -152,7 +152,7 @@
     "description": "Delete button"
   },
   "directEdit": {
-    "message": "直接配置编辑(高级)",
+    "message": "编辑本地配置(高级)",
     "description": "Direct edit section title"
   },
   "jsonPlaceholder": {

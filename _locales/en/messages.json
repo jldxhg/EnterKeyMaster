@@ -152,7 +152,7 @@
     "description": "Delete button"
   },
   "directEdit": {
-    "message": "Direct Config Edit (Advanced)",
+    "message": "Config Edit (Advanced)",
     "description": "Direct edit section title"
   },
   "jsonPlaceholder": {
