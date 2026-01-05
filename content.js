@@ -58,6 +58,7 @@
     "chat.deepseek.com": { selector: "._7436101" },
     "github.com": { send: FUNCTIONS.simEnter },
     "chatglm.cn": { send: FUNCTIONS.simEnter },
+    "filehelper.weixin.qq.com": { insertNewline: FUNCTIONS.simShiftEnter },
   };
 
   window.SITE_ADAPTERS = {
