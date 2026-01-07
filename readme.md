@@ -13,3 +13,4 @@ All user preferences (e.g., shortcut settings, enabled/disabled domains) are sto
 
 # Install
 Edge ： https://microsoftedge.microsoft.com/addons/detail/fcbcklpmnoplglfegimeepmljaplpknb
+Chrome: https://chromewebstore.google.com/detail/enterkeymaster/ndnoomhongebiicbeighmimhhokfcdfe
