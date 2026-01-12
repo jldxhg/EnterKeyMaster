@@ -4,12 +4,12 @@
 
 <br/>
 
-## [🔗 Get it on Chrome Web Store](https://chromewebstore.google.com/detail/enterkeymaster/ndnoomhongebiicbeighmimhhokfcdfe)
-## [🔗 Get it on Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/fcbcklpmnoplglfegimeepmljaplpknb)
+## [🔗 Chrome Web Store](https://chromewebstore.google.com/detail/enterkeymaster/ndnoomhongebiicbeighmimhhokfcdfe)
+## [🔗 Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/fcbcklpmnoplglfegimeepmljaplpknb)
 
 <br/>
 
-[English] | [中文版](./README_zh.md)
+[English] | [中文版](./readme_zh.md)
 
 ---
 

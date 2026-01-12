@@ -4,12 +4,12 @@
 
 <br/>
 
-## [🔗 前往 Chrome 网上应用店下载](https://chromewebstore.google.com/detail/enterkeymaster/ndnoomhongebiicbeighmimhhokfcdfe)
-## [🔗 前往 Microsoft Edge 外接程序商店下载](https://microsoftedge.microsoft.com/addons/detail/fcbcklpmnoplglfegimeepmljaplpknb)
+## [🔗 前往 Chrome 网上应用店](https://chromewebstore.google.com/detail/enterkeymaster/ndnoomhongebiicbeighmimhhokfcdfe)
+## [🔗 前往 Microsoft Edge 插件商店](https://microsoftedge.microsoft.com/addons/detail/fcbcklpmnoplglfegimeepmljaplpknb)
 
 <br/>
 
-[English](./README.md) | [中文版]
+[English](./readme.md) | [中文版]
 
 ---
 
