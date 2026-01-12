@@ -1,16 +1,32 @@
-# EnterKeyMaster - 自定义 Enter 键的行为
+# EnterKeyMaster ⌨️
 
-一款轻量级浏览器插件，让你在 聊天网页中自由定制 Enter/Ctrl+Enter/Shift+Enter 的行为，阻止误触提前发送。同时可以自由定制为换行或阻止
+**Stop the "Accidental Send" Anxiety. One rule for every AI chat, defined by you.**
 
-Customize your Enter, Ctrl+Enter and Shift+Enter shortcuts freely. Prevent accidental message sends triggered by unintended Enter presses, and set each key combination to Send, Newline or Disabled at will!
+<br/>
 
+## [🔗 Get it on Chrome Web Store](https://chromewebstore.google.com/detail/enterkeymaster/ndnoomhongebiicbeighmimhhokfcdfe)
+## [🔗 Get it on Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/fcbcklpmnoplglfegimeepmljaplpknb)
 
-# Privacy Policy
+<br/>
 
-EnterKeyMaster is a browser extension designed to customize Enter key behavior . **We do NOT collect, submit,transmit, or share any user data.**
+[English] | [中文版](./README_zh.md)
 
-All user preferences (e.g., shortcut settings, enabled/disabled domains) are stored **locally** in your browser's `chrome.storage` API. No data is sent to external servers, third-party services, or the extension developer.
+---
 
-# Install
-Edge ： https://microsoftedge.microsoft.com/addons/detail/fcbcklpmnoplglfegimeepmljaplpknb
-Chrome: https://chromewebstore.google.com/detail/enterkeymaster/ndnoomhongebiicbeighmimhhokfcdfe
+## 💡 Why EnterKeyMaster
+Inconsistent keyboard shortcuts are frustrating. Some websites use `Shift + Enter` for a new line, others use `Ctrl + Enter`, and most AI chats (ChatGPT, Claude, DeepSeek) default to `Enter` to send—often leading to half-baked messages being sent by mistake.
+
+**EnterKeyMaster** standardizes your workflow by putting the power back into your `Enter` key.
+
+## 🚀 Key Features
+* **Custom Enter Logic:** Rebind `Enter` to "New Line" and `Ctrl+Enter` to "Send"—or any combination that fits your muscle memory.
+* **Unified Experience:** No more remembering which site uses which shortcut. Apply your personal rule globally.
+* **Per-Domain Overrides:** Need different behaviors for ChatGPT and Slack? Set custom rules for specific domains in seconds.
+* **Smart Detection:** Automatically identifies chat textareas across the web without manual setup.
+* **Privacy First:** Your keystrokes are your business. Everything processed locally.
+
+## 🔒 Privacy Policy
+**EnterKeyMaster does not collect, store, or transmit any personal data or keystrokes.**
+* All operations are performed locally in your browser.
+* No third-party tracking or analytics.
+* Open-source for full transparency.

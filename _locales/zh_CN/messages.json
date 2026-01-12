@@ -8,7 +8,7 @@
     "description": "Extension description"
   },
   "popupTitle": {
-    "message": "快捷键设置",
+    "message": "键盘设置",
     "description": "Popup page title"
   },
   "loading": {
@@ -52,7 +52,7 @@
     "description": "Newline action label"
   },
   "actionBlock": {
-    "message": "阻止",
+    "message": "阻止发送",
     "description": "Block action label"
   },
   "actionDefault": {
@@ -80,7 +80,7 @@
     "description": "Default enable toggle in options"
   },
   "projectInfo": {
-    "message": "项目信息",
+    "message": "关于",
     "description": "Project info section title"
   },
   "projectUrl": {
@@ -104,7 +104,7 @@
     "description": "License text"
   },
   "siteConfig": {
-    "message": "网站配置",
+    "message": "网站",
     "description": "Site configuration section title"
   },
   "addSite": {
@@ -128,7 +128,7 @@
     "description": "Shift+Enter column header"
   },
   "colSelector": {
-    "message": "发送按钮选择器",
+    "message": "按钮选择器",
     "description": "Selector column header"
   },
   "colStatus": {
@@ -152,7 +152,7 @@
     "description": "Delete button"
   },
   "directEdit": {
-    "message": "编辑本地配置(高级)",
+    "message": "编辑配置(高级)",
     "description": "Direct edit section title"
   },
   "jsonPlaceholder": {
@@ -160,7 +160,7 @@
     "description": "JSON editor placeholder"
   },
   "btnSave": {
-    "message": "立即保存",
+    "message": "保存",
     "description": "Save button"
   },
   "addSiteModalTitle": {

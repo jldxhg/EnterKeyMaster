@@ -8,7 +8,7 @@
     "description": "Extension description"
   },
   "popupTitle": {
-    "message": "Shortcut Settings",
+    "message": "Keyboard Settings",
     "description": "Popup page title"
   },
   "loading": {
@@ -52,7 +52,7 @@
     "description": "Newline action label"
   },
   "actionBlock": {
-    "message": "Block",
+    "message": "Prevent Send",
     "description": "Block action label"
   },
   "actionDefault": {
@@ -80,7 +80,7 @@
     "description": "Default enable toggle in options"
   },
   "projectInfo": {
-    "message": "Project Info",
+    "message": "About",
     "description": "Project info section title"
   },
   "projectUrl": {
@@ -104,7 +104,7 @@
     "description": "License text"
   },
   "siteConfig": {
-    "message": "Site Configuration",
+    "message": "Sites",
     "description": "Site configuration section title"
   },
   "addSite": {
@@ -128,7 +128,7 @@
     "description": "Shift+Enter column header"
   },
   "colSelector": {
-    "message": "Send Button Selector",
+    "message": "Button Selector",
     "description": "Selector column header"
   },
   "colStatus": {
@@ -152,7 +152,7 @@
     "description": "Delete button"
   },
   "directEdit": {
-    "message": "Config Edit (Advanced)",
+    "message": "Edit Config (Advanced)",
     "description": "Direct edit section title"
   },
   "jsonPlaceholder": {
@@ -160,7 +160,7 @@
     "description": "JSON editor placeholder"
   },
   "btnSave": {
-    "message": "Save Now",
+    "message": "Save",
     "description": "Save button"
   },
   "addSiteModalTitle": {
