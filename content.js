@@ -54,11 +54,12 @@
 
   const ADAPTERS = {
     "chatgpt.com": { insertNewline: FUNCTIONS.simShiftEnter },
-    "www.qianwen.com": { selector: ".operateBtn-JsB9e2" },
+    "www.qianwen.com": { selector: ".operateBtn-ehxNOr" },
     "chat.deepseek.com": { selector: "._7436101" },
     "github.com": { send: FUNCTIONS.simEnter },
     "chatglm.cn": { send: FUNCTIONS.simEnter },
     "filehelper.weixin.qq.com": { insertNewline: FUNCTIONS.simShiftEnter },
+    "www.doubao.com": { selector: "#flow-end-msg-send" },
   };
 
   window.SITE_ADAPTERS = {
@@ -233,10 +234,10 @@ function insertNewline(target) {
 
     const opts = { bubbles: true, cancelable: true, composed: true };
     target.dispatchEvent(
-      new InputEvent("beforeinput", { ...opts, inputType: "insertLineBreak" })
+      new InputEvent("beforeinput", { ...opts, inputType: "insertLineBreak" }),
     );
     target.dispatchEvent(
-      new InputEvent("input", { ...opts, inputType: "insertLineBreak" })
+      new InputEvent("input", { ...opts, inputType: "insertLineBreak" }),
     );
   }
 }
