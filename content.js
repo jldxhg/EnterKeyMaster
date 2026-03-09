@@ -122,6 +122,9 @@ window.addEventListener("keydown", handleEnterKey, {
   } finally {
     initialized = true;
   }
+
+  const thanksMsg = chrome.i18n.getMessage("thanksMessage");
+  console.log("EnterKeyMaster: " + thanksMsg);
 })();
 
 // 核心事件处理

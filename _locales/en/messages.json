@@ -282,5 +282,9 @@
   "siteAdded": {
     "message": "Added {domain}",
     "description": "Toast message when site added"
+  },
+  "thanksMessage": {
+    "message": "Thanks for using EnterKeyMaster! If you find this extension helpful, please leave us a positive review on the Web Store. Your support motivates us!",
+    "description": "Thanks message shown in console"
   }
 }

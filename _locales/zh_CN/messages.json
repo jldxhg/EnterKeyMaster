@@ -282,5 +282,9 @@
   "siteAdded": {
     "message": "已添加 {domain}",
     "description": "Toast message when site added"
+  },
+  "thanksMessage": {
+    "message": "感谢使用 EnterKeyMaster! 如果您觉得这个插件有帮助，请前往商店给我们好评，您的支持是我们最大的动力！",
+    "description": "Thanks message shown in console"
   }
 }

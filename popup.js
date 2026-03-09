@@ -1,9 +1,4 @@
-const actionLabels = {
-  block: chrome.i18n.getMessage("actionBlock"),
-  send: chrome.i18n.getMessage("actionSend"),
-  addNewline: chrome.i18n.getMessage("actionNewline"),
-  default: chrome.i18n.getMessage("actionDefault"),
-};
+const { DEFAULT_CONFIG, actionLabels, applyI18n, loadConfig, saveConfig, notifyAllTabs, showToast, printWelcomeMessage } = SharedUtils;
 
 let currentDomain = "";
 let currentConfig = {};
@@ -12,20 +7,11 @@ let domainConfigs = {};
 
 document.addEventListener("DOMContentLoaded", async () => {
   applyI18n();
+  printWelcomeMessage();
   await loadCurrentDomain();
-  await loadConfig();
+  await loadConfigData();
   setupEventListeners();
 });
-
-function applyI18n() {
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    const message = chrome.i18n.getMessage(key);
-    if (message) {
-      el.textContent = message;
-    }
-  });
-}
 
 async function loadCurrentDomain() {
   try {
@@ -55,28 +41,20 @@ async function loadCurrentDomain() {
   }
 }
 
-async function loadConfig() {
-  try {
-    const result = await chrome.storage.sync.get([
-      "domainConfigs",
-      "defaultEnabled",
-    ]);
+async function loadConfigData() {
+  const result = await loadConfig();
+  domainConfigs = result.domainConfigs;
+  defaultEnabled = result.defaultEnabled;
 
-    domainConfigs = result.domainConfigs || {};
-    defaultEnabled =
-      result.defaultEnabled !== undefined ? result.defaultEnabled : true;
+  const config = domainConfigs[currentDomain] || domainConfigs.default || {};
+  currentConfig = {
+    enter: config.enter || "addNewline",
+    ctrlEnter: config.ctrlEnter || "send",
+    shiftEnter: config.shiftEnter || "default",
+  };
 
-    // 获取当前域名的配置
-    const config = domainConfigs[currentDomain] || domainConfigs.default || {};
-    currentConfig = {
-      enter: config.enter || "addNewline",
-      ctrlEnter: config.ctrlEnter || "send",
-      shiftEnter: config.shiftEnter || "default",
-    };
-
-    updateUI();
-    updateEnableStatus();
-  } catch (error) {}
+  updateUI();
+  updateEnableStatus();
 }
 
 function updateUI() {
@@ -139,8 +117,27 @@ function updateStatusIndicator(isActive) {
   }
 }
 
+async function saveConfigData() {
+  const config = domainConfigs[currentDomain] || { ...DEFAULT_CONFIG };
+  domainConfigs[currentDomain] = { ...config, ...currentConfig };
+  await saveConfig({ domainConfigs, defaultEnabled });
+}
+
+async function saveDefaultEnabled() {
+  await saveConfig({ defaultEnabled });
+  await notifyAllTabs({ type: "SET_DEFAULT_ENABLED", enabled: defaultEnabled });
+}
+
+async function toggleDomainEnabled(enabled) {
+  if (!domainConfigs[currentDomain]) {
+    domainConfigs[currentDomain] = { ...DEFAULT_CONFIG };
+  }
+  domainConfigs[currentDomain].enabled = enabled;
+  await saveConfig({ domainConfigs });
+  await notifyAllTabs({ type: "TOGGLE_DOMAIN", domain: currentDomain, enabled });
+}
+
 function setupEventListeners() {
-  // 点击按键项展开/收起
   document.querySelectorAll(".key-item").forEach((item) => {
     const label = item.querySelector(".key-label");
     const options = item.querySelector(".key-options");
@@ -160,7 +157,6 @@ function setupEventListeners() {
     });
   });
 
-  // 选择选项
   document.querySelectorAll(".option").forEach((option) => {
     option.addEventListener("click", async (e) => {
       e.stopPropagation();
@@ -170,7 +166,7 @@ function setupEventListeners() {
       const action = option.dataset.action;
 
       currentConfig[key] = action;
-      await saveConfig();
+      await saveConfigData();
 
       updateUI();
 
@@ -179,7 +175,6 @@ function setupEventListeners() {
     });
   });
 
-  // 默认启用/禁用开关
   const defaultToggle = document.getElementById("defaultToggle");
   if (defaultToggle) {
     defaultToggle.addEventListener("change", async (e) => {
@@ -189,7 +184,6 @@ function setupEventListeners() {
     });
   }
 
-  // 域名启用/禁用开关
   const domainToggle = document.getElementById("domainToggle");
   if (domainToggle) {
     domainToggle.addEventListener("change", async (e) => {
@@ -199,126 +193,15 @@ function setupEventListeners() {
     });
   }
 
-  // 底部按钮
   document.getElementById("settingsBtn")?.addEventListener("click", () => {
-    chrome.runtime.openOptionsPage();
+    if (chrome.runtime.openOptionsPage) {
+      chrome.runtime.openOptionsPage();
+    } else {
+      window.open(chrome.runtime.getURL("options.html"));
+    }
   });
 
   document.getElementById("feedbackBtn")?.addEventListener("click", () => {
-    chrome.tabs.create({
-      url: "https://github.com/jldxhg/EnterKeyMaster",
-    });
+    window.open("https://github.com/jldxhg/EnterKeyMaster/issues", "_blank");
   });
-
-  // 点击外部关闭展开项
-  document.addEventListener("click", () => {
-    document.querySelectorAll(".key-item").forEach((item) => {
-      item.classList.remove("expanded");
-      item.querySelector(".key-options").classList.add("hidden");
-    });
-  });
-}
-
-async function saveConfig() {
-  try {
-    const result = await chrome.storage.sync.get("domainConfigs");
-    const configs = result.domainConfigs || {};
-
-    // 确保当前域名配置存在
-    if (!configs[currentDomain]) {
-      configs[currentDomain] = configs.default
-        ? { ...configs.default }
-        : {
-            enabled: null,
-            selector: "",
-            enter: "addNewline",
-            ctrlEnter: "send",
-            shiftEnter: "default",
-          };
-    }
-
-    // 更新按键配置
-    configs[currentDomain].enter = currentConfig.enter;
-    configs[currentDomain].ctrlEnter = currentConfig.ctrlEnter;
-    configs[currentDomain].shiftEnter = currentConfig.shiftEnter;
-
-    await chrome.storage.sync.set({ domainConfigs: configs });
-
-    // 同步更新全局变量
-    domainConfigs = configs;
-
-    // 通知content script更新
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
-    if (tab?.id) {
-      chrome.tabs.sendMessage(tab.id, {
-        type: "CONFIG_UPDATED",
-        config: currentConfig,
-      });
-    }
-  } catch (error) {}
-}
-
-async function saveDefaultEnabled() {
-  try {
-    await chrome.storage.sync.set({ defaultEnabled });
-
-    // 通知所有标签页更新状态
-    const tabs = await chrome.tabs.query({});
-    tabs.forEach((tab) => {
-      if (tab.id) {
-        chrome.tabs
-          .sendMessage(tab.id, {
-            type: "SET_DEFAULT_ENABLED",
-            enabled: defaultEnabled,
-          })
-          .catch(() => {});
-      }
-    });
-  } catch (error) {}
-}
-
-async function toggleDomainEnabled(enabled) {
-  try {
-    const result = await chrome.storage.sync.get("domainConfigs");
-    const configs = result.domainConfigs || {};
-
-    // 确保当前域名配置存在
-    if (!configs[currentDomain]) {
-      configs[currentDomain] = configs.default
-        ? { ...configs.default }
-        : {
-            enabled: null,
-            selector: "",
-            enter: "addNewline",
-            ctrlEnter: "send",
-            shiftEnter: "default",
-          };
-    }
-
-    // 设置域名启用状态
-    configs[currentDomain].enabled = enabled;
-
-    await chrome.storage.sync.set({ domainConfigs: configs });
-
-    // 同步更新全局变量
-    domainConfigs = configs;
-
-    // 通知当前标签页更新状态
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
-    if (tab?.id) {
-      chrome.tabs
-        .sendMessage(tab.id, {
-          type: "TOGGLE_DOMAIN",
-          domain: currentDomain,
-          enabled: enabled,
-        })
-        .catch(() => {});
-    }
-  } catch (error) {}
 }

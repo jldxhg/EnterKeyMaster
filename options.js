@@ -1,59 +1,28 @@
-const actionLabels = {
-  block: chrome.i18n.getMessage("actionBlock"),
-  send: chrome.i18n.getMessage("actionSend"),
-  addNewline: chrome.i18n.getMessage("actionNewline"),
-  default: chrome.i18n.getMessage("actionDefault"),
-};
+const { DEFAULT_CONFIG, actionLabels, applyI18n, loadConfig, saveConfig, notifyAllTabs, showToast, printWelcomeMessage } = SharedUtils;
 
 let domainConfigs = {};
 let defaultEnabled = true;
 
-function applyI18n() {
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    const message = chrome.i18n.getMessage(key);
-    if (message) {
-      el.textContent = message;
-    }
-  });
-
-  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-placeholder");
-    const message = chrome.i18n.getMessage(key);
-    if (message) {
-      el.placeholder = message;
-    }
-  });
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   applyI18n();
-  await loadConfig();
+  printWelcomeMessage();
+  await loadConfigData();
   renderTable();
   setupEventListeners();
   loadJsonConfig();
 });
 
-async function loadConfig() {
-  try {
-    const result = await chrome.storage.sync.get([
-      "domainConfigs",
-      "defaultEnabled",
-    ]);
-
-    domainConfigs = result.domainConfigs || {};
-    defaultEnabled =
-      result.defaultEnabled !== undefined ? result.defaultEnabled : true;
-
-    document.getElementById("defaultEnabledToggle").checked = defaultEnabled;
-  } catch (error) {}
+async function loadConfigData() {
+  const result = await loadConfig();
+  domainConfigs = result.domainConfigs;
+  defaultEnabled = result.defaultEnabled;
+  document.getElementById("defaultEnabledToggle").checked = defaultEnabled;
 }
 
 function renderTable() {
   const tbody = document.getElementById("tableBody");
   tbody.innerHTML = "";
 
-  // 排序：default排最前
   const domains = Object.keys(domainConfigs).sort((a, b) => {
     if (a === "default") return -1;
     if (b === "default") return 1;
@@ -64,7 +33,6 @@ function renderTable() {
     const config = domainConfigs[domain];
     const isDefault = domain === "default";
 
-    // 计算域名是否启用
     const isDomainEnabled =
       config.enabled !== null && config.enabled !== undefined
         ? config.enabled
@@ -106,9 +74,7 @@ function renderTable() {
         </div>
       </td>
       <td>
-        <button class="btn-delete" data-domain="${domain}" ${
-      isDefault ? "disabled" : ""
-    }>
+        <button class="btn-delete" data-domain="${domain}" ${isDefault ? "disabled" : ""}>
           ${chrome.i18n.getMessage("btnDelete")}
         </button>
       </td>
@@ -131,89 +97,57 @@ function renderOptions(selectedValue) {
 }
 
 function setupEventListeners() {
-  // 默认全局模式开关
-  document
-    .getElementById("defaultEnabledToggle")
-    .addEventListener("change", async (e) => {
-      defaultEnabled = e.target.checked;
-      await chrome.storage.sync.set({ defaultEnabled });
-      renderTable();
-      showToast(
-        defaultEnabled
-          ? chrome.i18n.getMessage("defaultEnabledAll")
-          : chrome.i18n.getMessage("defaultDisabledAll")
-      );
+  document.getElementById("defaultEnabledToggle").addEventListener("change", async (e) => {
+    defaultEnabled = e.target.checked;
+    await saveConfig({ defaultEnabled });
+    renderTable();
+    showToast(defaultEnabled
+      ? chrome.i18n.getMessage("defaultEnabledAll")
+      : chrome.i18n.getMessage("defaultDisabledAll"));
+    await notifyAllTabs({ type: "SET_DEFAULT_ENABLED", enabled: defaultEnabled });
+  });
 
-      // 通知所有标签页更新状态
-      const tabs = await chrome.tabs.query({});
-      tabs.forEach((tab) => {
-        if (tab.id) {
-          chrome.tabs
-            .sendMessage(tab.id, {
-              type: "SET_DEFAULT_ENABLED",
-              enabled: defaultEnabled,
-            })
-            .catch(() => {});
-        }
-      });
-    });
-
-  // 项目信息折叠/展开
   const infoHeader = document.getElementById("infoHeader");
   const infoContent = document.getElementById("infoContent");
   const toggleInfoBtn = document.getElementById("toggleInfoBtn");
+  const localEditHeader = document.getElementById("localEditHeader");
+  const localEditContent = document.getElementById("localEditContent");
+  const toggleEditBtn = document.getElementById("toggleEditBtn");
 
   infoHeader.addEventListener("click", () => {
     infoContent.classList.toggle("expanded");
-    toggleInfoBtn.textContent = infoContent.classList.contains("expanded")
-      ? "▲"
-      : "▼";
+    toggleInfoBtn.textContent = infoContent.classList.contains("expanded") ? "▲" : "▼";
   });
-
-  // 本地编辑折叠/展开
-  const localEditHeader = document.getElementById("localEditHeader");
-  const localEditContent = document.getElementById("localEditContent");
-  const toggleBtn = document.getElementById("toggleEditBtn");
 
   localEditHeader.addEventListener("click", () => {
     localEditContent.classList.toggle("expanded");
-    toggleBtn.textContent = localEditContent.classList.contains("expanded")
-      ? "▲"
-      : "▼";
+    toggleEditBtn.textContent = localEditContent.classList.contains("expanded") ? "▲" : "▼";
   });
 
-  // 保存JSON配置
   document.getElementById("saveJsonBtn").addEventListener("click", async () => {
     await saveJsonConfig();
   });
 
-  // 添加域名按钮
   document.getElementById("addDomainBtn").addEventListener("click", () => {
     document.getElementById("addDomainModal").classList.remove("hidden");
     document.getElementById("newDomainInput").value = "";
     document.getElementById("newDomainInput").focus();
   });
 
-  // 确认添加
   document.getElementById("confirmAddBtn").addEventListener("click", () => {
     addDomain();
   });
 
-  // 取消添加
   document.getElementById("cancelAddBtn").addEventListener("click", () => {
     document.getElementById("addDomainModal").classList.add("hidden");
   });
 
-  // 回车添加
-  document
-    .getElementById("newDomainInput")
-    .addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        addDomain();
-      }
-    });
+  document.getElementById("newDomainInput").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      addDomain();
+    }
+  });
 
-  // 事件委托：下拉选择器变化
   document.getElementById("tableBody").addEventListener("change", async (e) => {
     if (e.target.classList.contains("action-select")) {
       const domain = e.target.dataset.domain;
@@ -232,15 +166,12 @@ function setupEventListeners() {
       domainConfigs[domain].enabled = enabled;
       await saveAll();
       renderTable();
-      showToast(
-        enabled
-          ? chrome.i18n.getMessage("enabledSite", domain)
-          : chrome.i18n.getMessage("disabledSite", domain)
-      );
+      showToast(enabled
+        ? chrome.i18n.getMessage("enabledSite", domain)
+        : chrome.i18n.getMessage("disabledSite", domain));
     }
   });
 
-  // 事件委托：选择器输入框失去焦点
   document.getElementById("tableBody").addEventListener(
     "blur",
     async (e) => {
@@ -248,7 +179,6 @@ function setupEventListeners() {
         const domain = e.target.dataset.domain;
         const newValue = e.target.value.trim();
 
-        // 只有真正改变时才保存
         if (domainConfigs[domain].selector !== newValue) {
           domainConfigs[domain].selector = newValue;
           await saveAll();
@@ -259,15 +189,12 @@ function setupEventListeners() {
     true
   );
 
-  // 事件委托：删除按钮
   document.getElementById("tableBody").addEventListener("click", async (e) => {
     if (e.target.classList.contains("btn-delete")) {
       const domain = e.target.dataset.domain;
       if (domain === "default") return;
 
-      // 删除域名配置
       delete domainConfigs[domain];
-
       await saveAll();
       renderTable();
       showToast(chrome.i18n.getMessage("configDeleted", domain));
@@ -284,26 +211,16 @@ async function addDomain() {
     return;
   }
 
-  domain = domain
-    .replace(/^https?:\/\//, "")
-    .replace(/^www\./, "")
-    .split("/")[0];
+  domain = domain.replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
 
   if (domainConfigs[domain]) {
     alert(chrome.i18n.getMessage("domainExists"));
     return;
   }
 
-  // 复制 default 配置
   domainConfigs[domain] = domainConfigs.default
     ? { ...domainConfigs.default }
-    : {
-        enabled: null,
-        selector: "",
-        enter: "addNewline",
-        ctrlEnter: "send",
-        shiftEnter: "default",
-      };
+    : { ...DEFAULT_CONFIG };
 
   await saveAll();
   document.getElementById("addDomainModal").classList.add("hidden");
@@ -312,32 +229,15 @@ async function addDomain() {
 }
 
 async function saveAll() {
-  try {
-    await chrome.storage.sync.set({ domainConfigs });
-    loadJsonConfig();
-  } catch (error) {}
-}
-
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  const toastText = document.getElementById("toastText");
-  toastText.textContent = message;
-
-  toast.classList.remove("hidden");
-  setTimeout(() => {
-    toast.classList.add("hidden");
-  }, 3000);
+  await saveConfig({ domainConfigs });
+  loadJsonConfig();
 }
 
 async function loadJsonConfig() {
-  try {
-    const jsonEditor = document.getElementById("jsonEditor");
-    const config = {
-      domainConfigs,
-      defaultEnabled,
-    };
-    jsonEditor.value = JSON.stringify(config, null, 2);
-  } catch (error) {}
+  const jsonEditor = document.getElementById("jsonEditor");
+  if (jsonEditor) {
+    jsonEditor.value = JSON.stringify({ domainConfigs, defaultEnabled }, null, 2);
+  }
 }
 
 function validateJson(jsonString) {
@@ -365,34 +265,14 @@ async function saveJsonConfig() {
 
   try {
     const parsedConfig = JSON.parse(jsonString);
-
     domainConfigs = parsedConfig.domainConfigs || {};
-    defaultEnabled =
-      parsedConfig.defaultEnabled !== undefined
-        ? parsedConfig.defaultEnabled
-        : true;
+    defaultEnabled = parsedConfig.defaultEnabled !== undefined ? parsedConfig.defaultEnabled : true;
 
-    await chrome.storage.sync.set({
-      domainConfigs,
-      defaultEnabled,
-    });
-
+    await saveConfig({ domainConfigs, defaultEnabled });
     renderTable();
     document.getElementById("defaultEnabledToggle").checked = defaultEnabled;
-
     showToast(chrome.i18n.getMessage("jsonSaved"));
-
-    const tabs = await chrome.tabs.query({});
-    tabs.forEach((tab) => {
-      if (tab.id) {
-        chrome.tabs
-          .sendMessage(tab.id, {
-            type: "SET_DEFAULT_ENABLED",
-            enabled: defaultEnabled,
-          })
-          .catch(() => {});
-      }
-    });
+    await notifyAllTabs({ type: "SET_DEFAULT_ENABLED", enabled: defaultEnabled });
   } catch (error) {
     jsonError.textContent = `${chrome.i18n.getMessage("saveFailed")}: ${error.message}`;
     jsonError.classList.remove("hidden");
