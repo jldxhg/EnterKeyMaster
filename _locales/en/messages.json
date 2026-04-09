@@ -251,6 +251,10 @@
     "message": "e.g.: send-btn",
     "description": "Selector input placeholder"
   },
+  "selectorSaved": {
+    "message": "Saved",
+    "description": "Toast message when selector saved"
+  },
   "defaultEnabledAll": {
     "message": "All websites enabled by default",
     "description": "Toast message when default enabled all"
@@ -260,15 +264,15 @@
     "description": "Toast message when default disabled all"
   },
   "enabledSite": {
-    "message": "Enabled {domain}",
+    "message": "Enabled",
     "description": "Toast message when site enabled"
   },
   "disabledSite": {
-    "message": "Disabled {domain}",
+    "message": "Disabled",
     "description": "Toast message when site disabled"
   },
   "configDeleted": {
-    "message": "{domain} configuration deleted",
+    "message": "Deleted",
     "description": "Toast message when config deleted"
   },
   "enterDomain": {
@@ -280,7 +284,7 @@
     "description": "Alert message when domain exists"
   },
   "siteAdded": {
-    "message": "Added {domain}",
+    "message": "Added",
     "description": "Toast message when site added"
   },
   "thanksMessage": {

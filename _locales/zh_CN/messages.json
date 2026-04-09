@@ -248,8 +248,12 @@
     "description": "Default label suffix"
   },
   "selectorPlaceholder": {
-    "message": "如：send-btn",
+    "message": "按钮选择器",
     "description": "Selector input placeholder"
+  },
+  "selectorSaved": {
+    "message": "已保存",
+    "description": "Toast message when selector saved"
   },
   "defaultEnabledAll": {
     "message": "默认启用所有网站",
@@ -260,15 +264,15 @@
     "description": "Toast message when default disabled all"
   },
   "enabledSite": {
-    "message": "已启用 {domain}",
+    "message": "已启用",
     "description": "Toast message when site enabled"
   },
   "disabledSite": {
-    "message": "已禁用 {domain}",
+    "message": "已禁用",
     "description": "Toast message when site disabled"
   },
   "configDeleted": {
-    "message": "{domain} 配置已删除",
+    "message": "已删除",
     "description": "Toast message when config deleted"
   },
   "enterDomain": {
@@ -280,7 +284,7 @@
     "description": "Alert message when domain exists"
   },
   "siteAdded": {
-    "message": "已添加 {domain}",
+    "message": "已添加",
     "description": "Toast message when site added"
   },
   "thanksMessage": {

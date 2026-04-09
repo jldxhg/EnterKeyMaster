@@ -167,8 +167,8 @@ function setupEventListeners() {
       await saveAll();
       renderTable();
       showToast(enabled
-        ? chrome.i18n.getMessage("enabledSite", domain)
-        : chrome.i18n.getMessage("disabledSite", domain));
+        ? chrome.i18n.getMessage("enabledSite", [domain])
+        : chrome.i18n.getMessage("disabledSite", [domain]));
     }
   });
 
@@ -197,7 +197,7 @@ function setupEventListeners() {
       delete domainConfigs[domain];
       await saveAll();
       renderTable();
-      showToast(chrome.i18n.getMessage("configDeleted", domain));
+      showToast(chrome.i18n.getMessage("configDeleted", [domain]));
     }
   });
 }
@@ -225,7 +225,7 @@ async function addDomain() {
   await saveAll();
   document.getElementById("addDomainModal").classList.add("hidden");
   renderTable();
-  showToast(chrome.i18n.getMessage("siteAdded", domain));
+  showToast(chrome.i18n.getMessage("siteAdded", [domain]));
 }
 
 async function saveAll() {
