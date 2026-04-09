@@ -55,7 +55,7 @@
   const ADAPTERS = {
     "chatgpt.com": { insertNewline: FUNCTIONS.simShiftEnter },
     "www.qianwen.com": { selector: ".operateBtn-ehxNOr" },
-    "chat.deepseek.com": { selector: "._7436101" },
+    "chat.deepseek.com": { selector: "._52c986b" },
     "github.com": { send: FUNCTIONS.simEnter },
     "chatglm.cn": { send: FUNCTIONS.simEnter },
     "filehelper.weixin.qq.com": { insertNewline: FUNCTIONS.simShiftEnter },
@@ -327,99 +327,34 @@ function isClickable(el) {
 
 function scoreButton(el) {
   let score = 0;
-
   const get = (attr) => (el.getAttribute(attr) || "").toLowerCase();
-  const a = {
-    ariaLabel: get("aria-label"),
-    testId: get("data-testid"),
-    test: get("data-test"),
-    type: get("type"),
-    class: get("class"),
-    id: el.id.toLowerCase(),
-    text: (el.textContent || "").toLowerCase().trim(),
-    html: el.innerHTML.toLowerCase(),
-  };
+  const str = (el.textContent || "").toLowerCase();
+  const className = el.className.toLowerCase();
+  const id = el.id.toLowerCase();
 
-  // 关键词匹配辅助函数
-  const matchKeyword = (str, exact, partial) => {
-    for (const kw of keywords) {
-      if (str === kw) return exact;
-      if (str.includes(kw)) return partial;
-    }
-    return 0;
-  };
+  const hasKeyword = (s) => keywords.some((kw) => s.includes(kw));
 
-  // 高分项
-  score += matchKeyword(a.ariaLabel, 100, 80);
-  score += matchKeyword(a.testId, 90, 70);
-  score += matchKeyword(a.test, 90, 70);
+  if (hasKeyword(get("aria-label"))) score += 100;
+  else if (hasKeyword(get("data-testid"))) score += 90;
+  else if (hasKeyword(get("data-test"))) score += 85;
 
-  if (a.type === "submit") score += 85;
-  else if (a.type === "button") score += 20;
+  const type = get("type");
+  if (type === "submit") score += 80;
+  else if (type === "button") score += 20;
 
-  // 中分项
-  for (const kw of keywords) {
-    if (a.class.includes(kw) || a.id.includes(kw)) {
-      score += 60;
-      break;
-    }
-  }
+  if (hasKeyword(className) || hasKeyword(id)) score += 60;
 
-  if (el.getAttribute("role") === "button") score += 10;
+  if (get("role") === "button") score += 10;
 
-  // 低分项
-  score += matchKeyword(a.text, 30, 30);
-  score += matchKeyword(a.html, 20, 20);
+  if (hasKeyword(str)) score += 30;
 
-  // 子元素检查
-  for (const child of el.querySelectorAll("*")) {
-    const cc = (child.getAttribute("class") || "").toLowerCase();
-    if (keywords.some((kw) => cc.includes(kw))) {
-      score += 40;
-      break;
-    }
-  }
+  if (el.querySelector('[class*="send"], [class*="submit"]')) score += 40;
 
-  // 图片检查
-  const img = el.querySelector("img");
-  if (img) {
-    score += matchKeyword((img.src || "").toLowerCase(), 45, 45);
-    score += matchKeyword((img.alt || "").toLowerCase(), 50, 50);
-  }
+  if (el.querySelector("img") && hasKeyword((el.querySelector("img").src || "").toLowerCase())) score += 45;
 
-  // SVG 检查
-  if (a.html.includes("<svg")) {
-    const svg = el.querySelector("svg");
-    if (svg) {
-      const svgStr = [
-        svg.getAttribute("aria-label"),
-        svg.getAttribute("title"),
-        svg.getAttribute("name"),
-        svg.getAttribute("data-icon"),
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-
-      if (keywords.some((kw) => svgStr.includes(kw))) score += 25;
-    }
-
-    const use = el.querySelector("use");
-    if (use) {
-      const href = (
-        use.getAttribute("xlink:href") ||
-        use.getAttribute("href") ||
-        ""
-      ).toLowerCase();
-      if (keywords.some((kw) => href.includes(kw))) score += 45;
-    }
-  }
-
-  // 位置加成
-  if (el.closest("fieldset, form")) score += 10;
+  if (el.closest("form, fieldset")) score += 10;
   if (el.parentElement?.querySelector("textarea, input")) score += 15;
 
-  // 标签基础分
   const tag = el.tagName;
   if (tag === "BUTTON") score += 5;
   else if (tag === "INPUT") score += 3;
